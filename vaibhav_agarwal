@@ -1,0 +1,100 @@
+/* package whatever; // don't place package name! */
+
+import java.*;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Ball
+{
+	private int x,y,radius;
+	private	int deltax, deltay;
+	
+	public Ball(int x, int y, int radius, int speed, int direction)
+	{
+		this.deltax= (int)(speed* Math.cos(direction));
+		this.deltay= (int)(speed* Math.sin(direction)* -1);
+	}
+	
+	public int getx()
+	{
+		return this.x;	
+	}
+	public int gety()
+	{
+		return this.y;	
+	}
+	public int getdeltax()
+	{
+		return this.deltax;	
+	}
+	public int getdeltay()
+	{
+		return this.deltay;	
+	}
+
+	public void setx(int x)
+	{
+		this.x = x;	
+	}
+	public void sety(int y)
+	{
+		this.y = y;	
+	}
+	public void setdeltax(int deltax)
+	{
+		this.deltax = deltax;	
+	}
+	public void setdeltay(int deltay)
+	{
+		this.deltay = deltay;	
+	}
+	
+	public void move()
+	{
+		int x,y;
+		x= getx();
+		y= gety();
+		int deltax= getdeltax();
+		int deltay= getdeltay();
+		x+=deltax;
+		y+=deltay;
+		setx(x);
+		sety(y);
+	}
+	
+	public void reflectHorizontal()
+	{
+		int deltax= getdeltax();
+		deltax= -1* deltax;
+		setdeltax(deltax);
+	}
+	
+	public void reflectVertical()
+	{
+		int deltay= getdeltay();
+		deltay= -1* deltay;
+		setdeltay(deltay);
+	}
+	
+	public void toString()
+	{
+		int x= getx();
+		int y= gety();
+		int deltax= getdeltax();
+		int deltay= getdeltay();
+		System.out.println("Ball at("+ x + ", "+ y+ ")of velocity("+ deltax+ ", " + deltay + ")");	
+	} 
+	
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Ball ball=new Ball(50,50,5,10,30);
+		Container box=new Container(0,0,100,100);
+		for(intstep=0;step<100;++step){
+			ball.move();
+			box.collidesWith(ball);
+			System.out.println(ball);//manualcheckthepositionoftheball
+		}
+	}
+}
